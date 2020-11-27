@@ -1,4 +1,13 @@
 # Go Clean Architecture
+
+Fork of Maksim Zhashkevych Go Clean Architecture:<br/>
+https://github.com/zhashkevych/go-clean-architecture
+
+Standard Go project layout conformant:<br/>
+https://github.com/golang-standards/project-layout
+
+---
+
 Example that shows core principles of the Clean Architecture in Golang projects.
 
 ## <a href="https://www.zhashkevych.com/clean-architecture">Blog Post</a>
@@ -99,7 +108,7 @@ Deletes bookmark by ID:
 
 
 ## Requirements
-- go 1.13
+- go 1.15
 - docker & docker-compose
 
 ## Run Project
