@@ -64,7 +64,7 @@ Creates new bookmark
 ##### Example Input: 
 ```
 {
-	"url": "https://github.com/zhashkevych/go-clean-architecture",
+	"url": "https://github.com/sablev/go-clean-architecture",
 	"title": "Go Clean Architecture example"
 } 
 ```
@@ -79,7 +79,7 @@ Returns all user bookmarks
 	"bookmarks": [
             {
                 "id": "5da2d8aae9b63715ddfae856",
-                "url": "https://github.com/zhashkevych/go-clean-architecture",
+                "url": "https://github.com/sablev/go-clean-architecture",
                 "title": "Go Clean Architecture example"
             }
     ]
