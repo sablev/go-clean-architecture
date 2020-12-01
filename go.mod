@@ -1,4 +1,4 @@
-module github.com/sablev/go-clean-architecture
+module github.com/sablev/go-clean-architecture-std
 
 go 1.15
 
