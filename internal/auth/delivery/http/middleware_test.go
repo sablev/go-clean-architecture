@@ -15,7 +15,7 @@ func TestAuthMiddleware(t *testing.T) {
 	r := gin.Default()
 	uc := new(usecase.MockUseCase)
 
-	r.POST("/api/endpoint", NewAuthMiddleware(uc), func(c *gin.Context) {
+	r.POST("/api/endpoint", NewMiddleware(uc), func(c *gin.Context) {
 		c.Status(http.StatusOK)
 	})
 

@@ -9,7 +9,7 @@ import (
 )
 
 func TestAuthFlow(t *testing.T) {
-	repo := new(mock.UserStorageMock)
+	repo := new(mock.Storage)
 
 	uc := New(repo, "salt", []byte("secret"), 86400)
 

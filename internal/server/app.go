@@ -60,7 +60,7 @@ func (a *App) Run(port string) error {
 	authhttp.RegisterEndpoints(router, a.authUC)
 
 	// API endpoints
-	authMiddleware := authhttp.NewAuthMiddleware(a.authUC)
+	authMiddleware := authhttp.NewMiddleware(a.authUC)
 	api := router.Group("/api", authMiddleware)
 
 	bmhttp.RegisterEndpoints(api, a.bookmarkUC)

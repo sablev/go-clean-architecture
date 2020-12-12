@@ -9,7 +9,7 @@ import (
 )
 
 func TestGetUser(t *testing.T) {
-	s := NewUserLocalStorage()
+	s := New()
 
 	id1 := "id"
 

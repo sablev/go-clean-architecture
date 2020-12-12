@@ -24,7 +24,7 @@ func TestCreate(t *testing.T) {
 		c.Set(auth.CtxUserKey, testUser)
 	})
 
-	uc := new(usecase.BookmarkUseCaseMock)
+	uc := new(usecase.MockUseCase)
 
 	RegisterEndpoints(group, uc)
 
@@ -56,7 +56,7 @@ func TestGet(t *testing.T) {
 		c.Set(auth.CtxUserKey, testUser)
 	})
 
-	uc := new(usecase.BookmarkUseCaseMock)
+	uc := new(usecase.MockUseCase)
 
 	RegisterEndpoints(group, uc)
 
@@ -95,7 +95,7 @@ func TestDelete(t *testing.T) {
 		c.Set(auth.CtxUserKey, testUser)
 	})
 
-	uc := new(usecase.BookmarkUseCaseMock)
+	uc := new(usecase.MockUseCase)
 
 	RegisterEndpoints(group, uc)
 

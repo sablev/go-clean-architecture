@@ -7,17 +7,17 @@ import (
 	"strings"
 )
 
-type AuthMiddleware struct {
+type Middleware struct {
 	usecase auth.UseCase
 }
 
-func NewAuthMiddleware(usecase auth.UseCase) gin.HandlerFunc {
-	return (&AuthMiddleware{
+func NewMiddleware(usecase auth.UseCase) gin.HandlerFunc {
+	return (&Middleware{
 		usecase: usecase,
 	}).Handle
 }
 
-func (m *AuthMiddleware) Handle(c *gin.Context) {
+func (m *Middleware) Handle(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
 		c.AbortWithStatus(http.StatusUnauthorized)

@@ -2,25 +2,25 @@ package localcache
 
 import (
 	"context"
-	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"sync"
 
 	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
-type BookmarkLocalStorage struct {
+type Storage struct {
 	bookmarks map[string]*models.Bookmark
 	mutex     *sync.Mutex
 }
 
-func NewBookmarkLocalStorage() *BookmarkLocalStorage {
-	return &BookmarkLocalStorage{
+func New() *Storage {
+	return &Storage{
 		bookmarks: make(map[string]*models.Bookmark),
 		mutex:     new(sync.Mutex),
 	}
 }
 
-func (s *BookmarkLocalStorage) Create(ctx context.Context, user *models.User, bm *models.Bookmark) error {
+func (s *Storage) Create(ctx context.Context, user *models.User, bm *models.Bookmark) error {
 	bm.UserID = user.ID
 
 	s.mutex.Lock()
@@ -30,7 +30,7 @@ func (s *BookmarkLocalStorage) Create(ctx context.Context, user *models.User, bm
 	return nil
 }
 
-func (s *BookmarkLocalStorage) Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
+func (s *Storage) Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
 	bookmarks := make([]*models.Bookmark, 0)
 
 	s.mutex.Lock()
@@ -44,7 +44,7 @@ func (s *BookmarkLocalStorage) Get(ctx context.Context, user *models.User) ([]*m
 	return bookmarks, nil
 }
 
-func (s *BookmarkLocalStorage) Delete(ctx context.Context, user *models.User, id string) error {
+func (s *Storage) Delete(ctx context.Context, user *models.User, id string) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 

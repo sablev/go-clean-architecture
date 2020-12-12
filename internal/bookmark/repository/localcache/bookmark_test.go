@@ -13,7 +13,7 @@ func TestGetBookmarks(t *testing.T) {
 	id := "id"
 	user := &models.User{ID: id}
 
-	s := NewBookmarkLocalStorage()
+	s := New()
 
 	for i := 0; i < 10; i++ {
 		bm := &models.Bookmark{
@@ -41,7 +41,7 @@ func TestDeleteBookmark(t *testing.T) {
 	bmID := "bmID"
 	bm := &models.Bookmark{ID: bmID, UserID: user1.ID}
 
-	s := NewBookmarkLocalStorage()
+	s := New()
 
 	err := s.Create(context.Background(), user1, bm)
 	assert.NoError(t, err)
