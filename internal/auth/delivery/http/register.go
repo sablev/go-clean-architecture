@@ -2,7 +2,7 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sablev/go-clean-architecture/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
 )
 
 func RegisterHTTPEndpoints(router *gin.Engine, uc auth.UseCase) {

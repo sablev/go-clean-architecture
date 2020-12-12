@@ -2,7 +2,7 @@ package auth
 
 import (
 	"context"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
 type UserRepository interface {

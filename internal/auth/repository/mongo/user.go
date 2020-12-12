@@ -2,7 +2,7 @@ package mongo
 
 import (
 	"context"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

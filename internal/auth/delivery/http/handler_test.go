@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	"github.com/sablev/go-clean-architecture/internal/auth/usecase"
+	"github.com/sablev/go-clean-architecture-std/internal/auth/usecase"
 	"net/http"
 	"net/http/httptest"
 	"testing"

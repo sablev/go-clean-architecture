@@ -2,8 +2,8 @@ package localstorage
 
 import (
 	"context"
-	"github.com/sablev/go-clean-architecture/internal/auth"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"sync"
 )
 

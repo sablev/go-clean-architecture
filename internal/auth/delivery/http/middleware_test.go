@@ -3,9 +3,9 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	"github.com/sablev/go-clean-architecture/internal/auth"
-	"github.com/sablev/go-clean-architecture/internal/auth/usecase"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/auth/usecase"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"net/http"
 	"net/http/httptest"
 	"testing"

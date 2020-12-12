@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"github.com/spf13/viper"
-	"github.com/sablev/go-clean-architecture/internal/config"
-	"github.com/sablev/go-clean-architecture/internal/server"
+	"github.com/sablev/go-clean-architecture-std/internal/config"
+	"github.com/sablev/go-clean-architecture-std/internal/server"
 )
 
 func main() {

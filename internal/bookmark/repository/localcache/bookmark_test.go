@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"github.com/sablev/go-clean-architecture/internal/bookmark"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"testing"
 )
 

@@ -2,10 +2,10 @@ package localcache
 
 import (
 	"context"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"sync"
 
-	"github.com/sablev/go-clean-architecture/internal/bookmark"
+	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
 )
 
 type BookmarkLocalStorage struct {

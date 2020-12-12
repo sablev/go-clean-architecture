@@ -3,7 +3,7 @@ package usecase
 import (
 	"context"
 	"github.com/stretchr/testify/mock"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
 type AuthUseCaseMock struct {

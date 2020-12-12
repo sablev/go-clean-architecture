@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sablev/go-clean-architecture/internal/auth"
-	"github.com/sablev/go-clean-architecture/internal/bookmark"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
 type Bookmark struct {

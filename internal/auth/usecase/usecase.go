@@ -4,11 +4,11 @@ import (
 	"context"
 	"crypto/sha1"
 	"fmt"
-	"github.com/sablev/go-clean-architecture/internal/models"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
-	"github.com/sablev/go-clean-architecture/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
 )
 
 type AuthClaims struct {

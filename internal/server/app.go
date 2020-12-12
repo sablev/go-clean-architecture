@@ -12,15 +12,15 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/sablev/go-clean-architecture/internal/auth"
-	"github.com/sablev/go-clean-architecture/internal/bookmark"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
 
-	authhttp "github.com/sablev/go-clean-architecture/internal/auth/delivery/http"
-	authmongo "github.com/sablev/go-clean-architecture/internal/auth/repository/mongo"
-	authusecase "github.com/sablev/go-clean-architecture/internal/auth/usecase"
-	bmhttp "github.com/sablev/go-clean-architecture/internal/bookmark/delivery/http"
-	bmmongo "github.com/sablev/go-clean-architecture/internal/bookmark/repository/mongo"
-	bmusecase "github.com/sablev/go-clean-architecture/internal/bookmark/usecase"
+	authhttp "github.com/sablev/go-clean-architecture-std/internal/auth/delivery/http"
+	authmongo "github.com/sablev/go-clean-architecture-std/internal/auth/repository/mongo"
+	authusecase "github.com/sablev/go-clean-architecture-std/internal/auth/usecase"
+	bmhttp "github.com/sablev/go-clean-architecture-std/internal/bookmark/delivery/http"
+	bmmongo "github.com/sablev/go-clean-architecture-std/internal/bookmark/repository/mongo"
+	bmusecase "github.com/sablev/go-clean-architecture-std/internal/bookmark/usecase"
 )
 
 type App struct {

@@ -3,7 +3,7 @@ package http
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/sablev/go-clean-architecture/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/auth"
 	"net/http"
 )
 

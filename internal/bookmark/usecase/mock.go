@@ -2,8 +2,9 @@ package usecase
 
 import (
 	"context"
+
+	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"github.com/stretchr/testify/mock"
-	"github.com/sablev/go-clean-architecture/internal/models"
 )
 
 type BookmarkUseCaseMock struct {
