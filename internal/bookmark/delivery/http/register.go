@@ -5,7 +5,7 @@ import (
 	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
 )
 
-func RegisterHTTPEndpoints(router *gin.RouterGroup, uc bookmark.UseCase) {
+func RegisterEndpoints(router *gin.RouterGroup, uc bookmark.UseCase) {
 	h := NewHandler(uc)
 
 	bookmarks := router.Group("/bookmarks")

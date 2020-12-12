@@ -2,10 +2,6 @@ package server
 
 import (
 	"context"
-	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
 	"os"
@@ -14,13 +10,17 @@ import (
 
 	"github.com/sablev/go-clean-architecture-std/internal/auth"
 	"github.com/sablev/go-clean-architecture-std/internal/bookmark"
-
 	authhttp "github.com/sablev/go-clean-architecture-std/internal/auth/delivery/http"
 	authmongo "github.com/sablev/go-clean-architecture-std/internal/auth/repository/mongo"
-	authusecase "github.com/sablev/go-clean-architecture-std/internal/auth/usecase"
+	authuc "github.com/sablev/go-clean-architecture-std/internal/auth/usecase"
 	bmhttp "github.com/sablev/go-clean-architecture-std/internal/bookmark/delivery/http"
 	bmmongo "github.com/sablev/go-clean-architecture-std/internal/bookmark/repository/mongo"
-	bmusecase "github.com/sablev/go-clean-architecture-std/internal/bookmark/usecase"
+	bmuc "github.com/sablev/go-clean-architecture-std/internal/bookmark/usecase"
+
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type App struct {
@@ -30,15 +30,15 @@ type App struct {
 	authUC     auth.UseCase
 }
 
-func NewApp() *App {
+func New() *App {
 	db := initDB()
 
-	userRepo := authmongo.NewUserRepository(db, viper.GetString("mongo.user_collection"))
-	bookmarkRepo := bmmongo.NewBookmarkRepository(db, viper.GetString("mongo.bookmark_collection"))
+	userRepo := authmongo.New(db, viper.GetString("mongo.user_collection"))
+	bmRepo := bmmongo.New(db, viper.GetString("mongo.bookmark_collection"))
 
 	return &App{
-		bookmarkUC: bmusecase.NewBookmarkUseCase(bookmarkRepo),
-		authUC: authusecase.NewAuthUseCase(
+		bookmarkUC: bmuc.New(bmRepo),
+		authUC: authuc.New(
 			userRepo,
 			viper.GetString("auth.hash_salt"),
 			[]byte(viper.GetString("auth.signing_key")),
@@ -57,13 +57,13 @@ func (a *App) Run(port string) error {
 
 	// Set up http handlers
 	// SignUp/SignIn endpoints
-	authhttp.RegisterHTTPEndpoints(router, a.authUC)
+	authhttp.RegisterEndpoints(router, a.authUC)
 
 	// API endpoints
 	authMiddleware := authhttp.NewAuthMiddleware(a.authUC)
 	api := router.Group("/api", authMiddleware)
 
-	bmhttp.RegisterHTTPEndpoints(api, a.bookmarkUC)
+	bmhttp.RegisterEndpoints(api, a.bookmarkUC)
 
 	// HTTP Server
 	a.httpServer = &http.Server{

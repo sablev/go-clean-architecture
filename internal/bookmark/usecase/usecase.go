@@ -7,29 +7,29 @@ import (
 	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
-type BookmarkUseCase struct {
+type UseCase struct {
 	bookmarkRepo bookmark.Repository
 }
 
-func NewBookmarkUseCase(bookmarkRepo bookmark.Repository) *BookmarkUseCase {
-	return &BookmarkUseCase{
+func New(bookmarkRepo bookmark.Repository) *UseCase {
+	return &UseCase{
 		bookmarkRepo: bookmarkRepo,
 	}
 }
 
-func (b BookmarkUseCase) CreateBookmark(ctx context.Context, user *models.User, url, title string) error {
+func (b UseCase) Create(ctx context.Context, user *models.User, url, title string) error {
 	bm := &models.Bookmark{
 		URL:   url,
 		Title: title,
 	}
 
-	return b.bookmarkRepo.CreateBookmark(ctx, user, bm)
+	return b.bookmarkRepo.Create(ctx, user, bm)
 }
 
-func (b BookmarkUseCase) GetBookmarks(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
-	return b.bookmarkRepo.GetBookmarks(ctx, user)
+func (b UseCase) Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
+	return b.bookmarkRepo.Get(ctx, user)
 }
 
-func (b BookmarkUseCase) DeleteBookmark(ctx context.Context, user *models.User, id string) error {
-	return b.bookmarkRepo.DeleteBookmark(ctx, user, id)
+func (b UseCase) Delete(ctx context.Context, user *models.User, id string) error {
+	return b.bookmarkRepo.Delete(ctx, user, id)
 }

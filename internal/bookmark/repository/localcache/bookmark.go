@@ -20,7 +20,7 @@ func NewBookmarkLocalStorage() *BookmarkLocalStorage {
 	}
 }
 
-func (s *BookmarkLocalStorage) CreateBookmark(ctx context.Context, user *models.User, bm *models.Bookmark) error {
+func (s *BookmarkLocalStorage) Create(ctx context.Context, user *models.User, bm *models.Bookmark) error {
 	bm.UserID = user.ID
 
 	s.mutex.Lock()
@@ -30,7 +30,7 @@ func (s *BookmarkLocalStorage) CreateBookmark(ctx context.Context, user *models.
 	return nil
 }
 
-func (s *BookmarkLocalStorage) GetBookmarks(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
+func (s *BookmarkLocalStorage) Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
 	bookmarks := make([]*models.Bookmark, 0)
 
 	s.mutex.Lock()
@@ -44,7 +44,7 @@ func (s *BookmarkLocalStorage) GetBookmarks(ctx context.Context, user *models.Us
 	return bookmarks, nil
 }
 
-func (s *BookmarkLocalStorage) DeleteBookmark(ctx context.Context, user *models.User, id string) error {
+func (s *BookmarkLocalStorage) Delete(ctx context.Context, user *models.User, id string) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 

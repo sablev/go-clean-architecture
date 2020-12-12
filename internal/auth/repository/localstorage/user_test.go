@@ -19,14 +19,14 @@ func TestGetUser(t *testing.T) {
 		Password: "password",
 	}
 
-	err := s.CreateUser(context.Background(), user)
+	err := s.Create(context.Background(), user)
 	assert.NoError(t, err)
 
-	returnedUser, err := s.GetUser(context.Background(), "user", "password")
+	returnedUser, err := s.Get(context.Background(), "user", "password")
 	assert.NoError(t, err)
 	assert.Equal(t, user, returnedUser)
 
-	returnedUser, err = s.GetUser(context.Background(), "user", "")
+	returnedUser, err = s.Get(context.Background(), "user", "")
 	assert.Error(t, err)
 	assert.Equal(t, err, auth.ErrUserNotFound)
 }

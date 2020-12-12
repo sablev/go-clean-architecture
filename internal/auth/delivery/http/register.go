@@ -5,7 +5,7 @@ import (
 	"github.com/sablev/go-clean-architecture-std/internal/auth"
 )
 
-func RegisterHTTPEndpoints(router *gin.Engine, uc auth.UseCase) {
+func RegisterEndpoints(router *gin.Engine, uc auth.UseCase) {
 	h := NewHandler(uc)
 
 	authEndpoints := router.Group("/auth")

@@ -21,11 +21,11 @@ func TestGetBookmarks(t *testing.T) {
 			UserID: user.ID,
 		}
 
-		err := s.CreateBookmark(context.Background(), user, bm)
+		err := s.Create(context.Background(), user, bm)
 		assert.NoError(t, err)
 	}
 
-	returnedBookmarks, err := s.GetBookmarks(context.Background(), user)
+	returnedBookmarks, err := s.Get(context.Background(), user)
 	assert.NoError(t, err)
 
 	assert.Equal(t, 10, len(returnedBookmarks))
@@ -43,16 +43,16 @@ func TestDeleteBookmark(t *testing.T) {
 
 	s := NewBookmarkLocalStorage()
 
-	err := s.CreateBookmark(context.Background(), user1, bm)
+	err := s.Create(context.Background(), user1, bm)
 	assert.NoError(t, err)
 
-	err = s.DeleteBookmark(context.Background(), user1, bmID)
+	err = s.Delete(context.Background(), user1, bmID)
 	assert.NoError(t, err)
 
-	err = s.CreateBookmark(context.Background(), user1, bm)
+	err = s.Create(context.Background(), user1, bm)
 	assert.NoError(t, err)
 
-	err = s.DeleteBookmark(context.Background(), user2, bmID)
+	err = s.Delete(context.Background(), user2, bmID)
 	assert.Error(t, err)
 	assert.Equal(t, err, bookmark.ErrBookmarkNotFound)
 }

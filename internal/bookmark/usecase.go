@@ -7,7 +7,7 @@ import (
 )
 
 type UseCase interface {
-	CreateBookmark(ctx context.Context, user *models.User, url, title string) error
-	GetBookmarks(ctx context.Context, user *models.User) ([]*models.Bookmark, error)
-	DeleteBookmark(ctx context.Context, user *models.User, id string) error
+	Create(ctx context.Context, user *models.User, url, title string) error
+	Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error)
+	Delete(ctx context.Context, user *models.User, id string) error
 }

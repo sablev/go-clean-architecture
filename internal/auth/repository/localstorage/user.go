@@ -2,9 +2,10 @@ package localstorage
 
 import (
 	"context"
+	"sync"
+
 	"github.com/sablev/go-clean-architecture-std/internal/auth"
 	"github.com/sablev/go-clean-architecture-std/internal/models"
-	"sync"
 )
 
 type UserLocalStorage struct {
@@ -19,7 +20,7 @@ func NewUserLocalStorage() *UserLocalStorage {
 	}
 }
 
-func (s *UserLocalStorage) CreateUser(ctx context.Context, user *models.User) error {
+func (s *UserLocalStorage) Create(ctx context.Context, user *models.User) error {
 	s.mutex.Lock()
 	s.users[user.ID] = user
 	s.mutex.Unlock()
@@ -27,7 +28,7 @@ func (s *UserLocalStorage) CreateUser(ctx context.Context, user *models.User) er
 	return nil
 }
 
-func (s *UserLocalStorage) GetUser(ctx context.Context, username, password string) (*models.User, error) {
+func (s *UserLocalStorage) Get(ctx context.Context, username, password string) (*models.User, error) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 

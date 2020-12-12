@@ -39,7 +39,7 @@ func (h *Handler) Create(c *gin.Context) {
 
 	user := c.MustGet(auth.CtxUserKey).(*models.User)
 
-	if err := h.useCase.CreateBookmark(c.Request.Context(), user, inp.URL, inp.Title); err != nil {
+	if err := h.useCase.Create(c.Request.Context(), user, inp.URL, inp.Title); err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
@@ -54,7 +54,7 @@ type getResponse struct {
 func (h *Handler) Get(c *gin.Context) {
 	user := c.MustGet(auth.CtxUserKey).(*models.User)
 
-	bms, err := h.useCase.GetBookmarks(c.Request.Context(), user)
+	bms, err := h.useCase.Get(c.Request.Context(), user)
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
@@ -78,7 +78,7 @@ func (h *Handler) Delete(c *gin.Context) {
 
 	user := c.MustGet(auth.CtxUserKey).(*models.User)
 
-	if err := h.useCase.DeleteBookmark(c.Request.Context(), user, inp.ID); err != nil {
+	if err := h.useCase.Delete(c.Request.Context(), user, inp.ID); err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}

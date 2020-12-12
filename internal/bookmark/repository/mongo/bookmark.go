@@ -15,17 +15,17 @@ type Bookmark struct {
 	Title  string             `bson:"title"`
 }
 
-type BookmarkRepository struct {
+type Repository struct {
 	db *mongo.Collection
 }
 
-func NewBookmarkRepository(db *mongo.Database, collection string) *BookmarkRepository {
-	return &BookmarkRepository{
+func New(db *mongo.Database, collection string) *Repository {
+	return &Repository{
 		db: db.Collection(collection),
 	}
 }
 
-func (r BookmarkRepository) CreateBookmark(ctx context.Context, user *models.User, bm *models.Bookmark) error {
+func (r Repository) Create(ctx context.Context, user *models.User, bm *models.Bookmark) error {
 	bm.UserID = user.ID
 
 	model := toModel(bm)
@@ -39,7 +39,7 @@ func (r BookmarkRepository) CreateBookmark(ctx context.Context, user *models.Use
 	return nil
 }
 
-func (r BookmarkRepository) GetBookmarks(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
+func (r Repository) Get(ctx context.Context, user *models.User) ([]*models.Bookmark, error) {
 	uid, _ := primitive.ObjectIDFromHex(user.ID)
 	cur, err := r.db.Find(ctx, bson.M{
 		"userId": uid,
@@ -68,7 +68,7 @@ func (r BookmarkRepository) GetBookmarks(ctx context.Context, user *models.User)
 	return toBookmarks(out), nil
 }
 
-func (r BookmarkRepository) DeleteBookmark(ctx context.Context, user *models.User, id string) error {
+func (r Repository) Delete(ctx context.Context, user *models.User, id string) error {
 	objID, _ := primitive.ObjectIDFromHex(id)
 	uID, _ := primitive.ObjectIDFromHex(user.ID)
 

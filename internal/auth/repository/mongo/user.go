@@ -14,17 +14,17 @@ type User struct {
 	Password string             `bson:"password"`
 }
 
-type UserRepository struct {
+type Repository struct {
 	db *mongo.Collection
 }
 
-func NewUserRepository(db *mongo.Database, collection string) *UserRepository {
-	return &UserRepository{
+func New(db *mongo.Database, collection string) *Repository {
+	return &Repository{
 		db: db.Collection(collection),
 	}
 }
 
-func (r UserRepository) CreateUser(ctx context.Context, user *models.User) error {
+func (r Repository) Create(ctx context.Context, user *models.User) error {
 	model := toMongoUser(user)
 	res, err := r.db.InsertOne(ctx, model)
 	if err != nil {
@@ -35,7 +35,7 @@ func (r UserRepository) CreateUser(ctx context.Context, user *models.User) error
 	return nil
 }
 
-func (r UserRepository) GetUser(ctx context.Context, username, password string) (*models.User, error) {
+func (r Repository) Get(ctx context.Context, username, password string) (*models.User, error) {
 	user := new(User)
 	err := r.db.FindOne(ctx, bson.M{
 		"username": username,

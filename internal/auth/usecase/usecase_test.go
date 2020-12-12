@@ -11,7 +11,7 @@ import (
 func TestAuthFlow(t *testing.T) {
 	repo := new(mock.UserStorageMock)
 
-	uc := NewAuthUseCase(repo, "salt", []byte("secret"), 86400)
+	uc := New(repo, "salt", []byte("secret"), 86400)
 
 	var (
 		username = "user"
@@ -26,12 +26,12 @@ func TestAuthFlow(t *testing.T) {
 	)
 
 	// Sign Up
-	repo.On("CreateUser", user).Return(nil)
+	repo.On("Create", user).Return(nil)
 	err := uc.SignUp(ctx, username, password)
 	assert.NoError(t, err)
 
 	// Sign In (Get Auth Token)
-	repo.On("GetUser", user.Username, user.Password).Return(user, nil)
+	repo.On("Get", user.Username, user.Password).Return(user, nil)
 	token, err := uc.SignIn(ctx, username, password)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, token)

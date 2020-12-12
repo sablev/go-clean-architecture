@@ -4,11 +4,12 @@ import (
 	"context"
 	"crypto/sha1"
 	"fmt"
-	"github.com/sablev/go-clean-architecture-std/internal/models"
 	"time"
 
-	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/sablev/go-clean-architecture-std/internal/auth"
+	"github.com/sablev/go-clean-architecture-std/internal/models"
+
+	"github.com/dgrijalva/jwt-go/v4"
 )
 
 type AuthClaims struct {
@@ -16,19 +17,19 @@ type AuthClaims struct {
 	User *models.User `json:"user"`
 }
 
-type AuthUseCase struct {
-	userRepo       auth.UserRepository
+type UseCase struct {
+	userRepo       auth.Repository
 	hashSalt       string
 	signingKey     []byte
 	expireDuration time.Duration
 }
 
-func NewAuthUseCase(
-	userRepo auth.UserRepository,
+func New(
+	userRepo auth.Repository,
 	hashSalt string,
 	signingKey []byte,
-	tokenTTLSeconds time.Duration) *AuthUseCase {
-	return &AuthUseCase{
+	tokenTTLSeconds time.Duration) *UseCase {
+	return &UseCase{
 		userRepo:       userRepo,
 		hashSalt:       hashSalt,
 		signingKey:     signingKey,
@@ -36,7 +37,7 @@ func NewAuthUseCase(
 	}
 }
 
-func (a *AuthUseCase) SignUp(ctx context.Context, username, password string) error {
+func (a *UseCase) SignUp(ctx context.Context, username, password string) error {
 	pwd := sha1.New()
 	pwd.Write([]byte(password))
 	pwd.Write([]byte(a.hashSalt))
@@ -46,16 +47,16 @@ func (a *AuthUseCase) SignUp(ctx context.Context, username, password string) err
 		Password: fmt.Sprintf("%x", pwd.Sum(nil)),
 	}
 
-	return a.userRepo.CreateUser(ctx, user)
+	return a.userRepo.Create(ctx, user)
 }
 
-func (a *AuthUseCase) SignIn(ctx context.Context, username, password string) (string, error) {
+func (a *UseCase) SignIn(ctx context.Context, username, password string) (string, error) {
 	pwd := sha1.New()
 	pwd.Write([]byte(password))
 	pwd.Write([]byte(a.hashSalt))
 	password = fmt.Sprintf("%x", pwd.Sum(nil))
 
-	user, err := a.userRepo.GetUser(ctx, username, password)
+	user, err := a.userRepo.Get(ctx, username, password)
 	if err != nil {
 		return "", auth.ErrUserNotFound
 	}
@@ -72,7 +73,7 @@ func (a *AuthUseCase) SignIn(ctx context.Context, username, password string) (st
 	return token.SignedString(a.signingKey)
 }
 
-func (a *AuthUseCase) ParseToken(ctx context.Context, accessToken string) (*models.User, error) {
+func (a *UseCase) ParseToken(ctx context.Context, accessToken string) (*models.User, error) {
 	token, err := jwt.ParseWithClaims(accessToken, &AuthClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])

@@ -13,9 +13,9 @@ import (
 
 func TestSignUp(t *testing.T) {
 	r := gin.Default()
-	uc := new(usecase.AuthUseCaseMock)
+	uc := new(usecase.MockUseCase)
 
-	RegisterHTTPEndpoints(r, uc)
+	RegisterEndpoints(r, uc)
 
 	signUpBody := &signInput{
 		Username: "testuser",
@@ -36,9 +36,9 @@ func TestSignUp(t *testing.T) {
 
 func TestSignIn(t *testing.T) {
 	r := gin.Default()
-	uc := new(usecase.AuthUseCaseMock)
+	uc := new(usecase.MockUseCase)
 
-	RegisterHTTPEndpoints(r, uc)
+	RegisterEndpoints(r, uc)
 
 	signUpBody := &signInput{
 		Username: "testuser",

@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
-	"github.com/spf13/viper"
+
 	"github.com/sablev/go-clean-architecture-std/internal/config"
 	"github.com/sablev/go-clean-architecture-std/internal/server"
+
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -12,7 +14,7 @@ func main() {
 		log.Fatalf("%s", err.Error())
 	}
 
-	app := server.NewApp()
+	app := server.New()
 
 	if err := app.Run(viper.GetString("port")); err != nil {
 		log.Fatalf("%s", err.Error())

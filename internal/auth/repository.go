@@ -5,7 +5,7 @@ import (
 	"github.com/sablev/go-clean-architecture-std/internal/models"
 )
 
-type UserRepository interface {
-	CreateUser(ctx context.Context, user *models.User) error
-	GetUser(ctx context.Context, username, password string) (*models.User, error)
+type Repository interface {
+	Create(ctx context.Context, user *models.User) error
+	Get(ctx context.Context, username, password string) (*models.User, error)
 }

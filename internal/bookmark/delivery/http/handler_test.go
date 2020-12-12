@@ -26,7 +26,7 @@ func TestCreate(t *testing.T) {
 
 	uc := new(usecase.BookmarkUseCaseMock)
 
-	RegisterHTTPEndpoints(group, uc)
+	RegisterEndpoints(group, uc)
 
 	inp := &createInput{
 		URL:   "testurl",
@@ -36,7 +36,7 @@ func TestCreate(t *testing.T) {
 	body, err := json.Marshal(inp)
 	assert.NoError(t, err)
 
-	uc.On("CreateBookmark", testUser, inp.URL, inp.Title).Return(nil)
+	uc.On("Create", testUser, inp.URL, inp.Title).Return(nil)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("POST", "/api/bookmarks", bytes.NewBuffer(body))
@@ -58,7 +58,7 @@ func TestGet(t *testing.T) {
 
 	uc := new(usecase.BookmarkUseCaseMock)
 
-	RegisterHTTPEndpoints(group, uc)
+	RegisterEndpoints(group, uc)
 
 	bms := make([]*models.Bookmark, 5)
 	for i := 0; i < 5; i++ {
@@ -69,7 +69,7 @@ func TestGet(t *testing.T) {
 		}
 	}
 
-	uc.On("GetBookmarks", testUser).Return(bms, nil)
+	uc.On("Get", testUser).Return(bms, nil)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/bookmarks", nil)
@@ -97,7 +97,7 @@ func TestDelete(t *testing.T) {
 
 	uc := new(usecase.BookmarkUseCaseMock)
 
-	RegisterHTTPEndpoints(group, uc)
+	RegisterEndpoints(group, uc)
 
 	inp := &deleteInput{
 		ID: "id",
@@ -106,7 +106,7 @@ func TestDelete(t *testing.T) {
 	body, err := json.Marshal(inp)
 	assert.NoError(t, err)
 
-	uc.On("DeleteBookmark", testUser, inp.ID).Return(nil)
+	uc.On("Delete", testUser, inp.ID).Return(nil)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("DELETE", "/api/bookmarks", bytes.NewBuffer(body))
